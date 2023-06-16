@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-
+    <Ranking></Ranking>
   </div>
 </template>
-
 <script>
-
+import Ranking from './views/Ranking.vue';
 export default {
   name: 'App',
   components: {
-
+    Ranking
   }
 }
 </script>
