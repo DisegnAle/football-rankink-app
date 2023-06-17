@@ -1,5 +1,4 @@
 <template>
-  <div class="ft__ranking-table">
     <DataTable v-if="rankingData" :value="rankingData">
       <Column field="intRank"></Column>
       <Column field="strTeam"></Column>
@@ -12,7 +11,6 @@
       <Column field="intGoalDifference" header="GD"></Column>
       <Column field="intPoints" header="Pts"></Column>
     </DataTable>
-  </div>
 </template>
 <script>
 import apis from '@/constants/apis';

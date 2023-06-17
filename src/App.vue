@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <Ranking></Ranking>
+    <div class="p-grid">
+      <div class="p-col">
+        <Ranking></Ranking>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -15,12 +19,5 @@ export default {
 
 <style>
 @import './assets/themes/material/theme.css';
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import '/node_modules/primeflex/primeflex.css';
 </style>

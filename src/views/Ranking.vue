@@ -1,10 +1,8 @@
 <template>
-  <div class="ft__ranking-view">
-    <ranking-table-vue></ranking-table-vue>
-  </div>
+      <ranking-table-vue></ranking-table-vue>
 </template>
 <script>
-import RankingTableVue from '../components/RankingTable.vue'
+import RankingTableVue from '../components/RankingTable.vue';
 export default {
   name: 'RankingView',
   components: {
