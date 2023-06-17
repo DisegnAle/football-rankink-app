@@ -26,10 +26,6 @@ export default {
     FormIcon
   },
   props: {
-    isFetching: {
-      type: Boolean,
-      required: true
-    },
     data: {
       type: Array,
       default:  () => []
