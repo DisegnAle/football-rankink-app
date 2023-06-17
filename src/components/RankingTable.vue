@@ -7,6 +7,15 @@
         </template>
       </Column>
       <Column field="strTeam"></Column>
+      <Column field="strTeamBadge">
+        <template #body="slotProps">
+            <form-icon
+              v-for="icon in slotProps.data.strForm.split('')"
+              :key="icon"
+              :form-type="icon">
+            </form-icon>
+        </template>
+      </Column>
       <Column field="intPlayed" header="GP"></Column>
       <Column field="intWin" header="W"></Column>
       <Column field="intDraw" header="D"></Column>
@@ -21,11 +30,13 @@
 import apis from '@/constants/apis';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
+import FormIcon from './FormIcon.vue';
 export default {
   name: 'RankingTable',
   components: {
     DataTable,
-    Column
+    Column,
+    FormIcon
   },
   data () {
     return {
