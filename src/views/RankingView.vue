@@ -1,17 +1,25 @@
 <template>
-  <ranking-table
-    :is-fetching="isFetching"
-    :ranking-data="rankingData"
-    :ranking-table-columns="rankingTableColumns">
-  </ranking-table>
+  <div>
+    <ranking-table
+      v-if="!isFetching"
+      :data="rankingData"
+      :table-columns="rankingTableColumns">
+    </ranking-table>
+    <skeleton-data-table
+      v-else
+      :table-columns="rankingTableColumns">
+    </skeleton-data-table>
+  </div>
 </template>
 <script>
 import RankingTable from '@/components/RankingTable.vue';
+import SkeletonDataTable from '@/components/SkeletonDataTable.vue';
 import apis from '@/constants/apis';
 export default {
   name: 'RankingView',
   components: {
-    RankingTable
+    RankingTable,
+    SkeletonDataTable
   },
   data () {
     return {
