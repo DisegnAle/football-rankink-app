@@ -1,6 +1,6 @@
 <template>
-  <DataTable :value="data" class="p-datatable-sm">
-    <Column v-for="col of tableColumns" :field="col.field" :header="col.header" :key="col.field">
+  <DataTable removableSort :value="data" class="p-datatable-sm">
+    <Column :sortable="!['strTeamBadge', 'strForm', 'intPlayed'].includes(col.field)" v-for="col of tableColumns" :field="col.field" :header="col.header" :key="col.field">
       <template #body="slotProps">
         <div v-if="col.field === 'strTeamBadge'">
           <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />

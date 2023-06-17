@@ -1,7 +1,7 @@
 <template>
   <div class="fr">
     <div class="p-grid fr__ranking-view-container">
-      <div class="p-col-10">
+      <div class="p-col-11">
         <ranking-view></ranking-view>
       </div>
     </div>
