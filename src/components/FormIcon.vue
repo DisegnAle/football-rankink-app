@@ -7,7 +7,12 @@
 <script>
 export default {
   name: 'FormIcon',
-  props: ['formType'],
+  props: {
+    formType: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     iconCssClass: function () {
       switch (this.formType) {
