@@ -2,13 +2,13 @@
   <div>
     <Card class="fr-card__ranking-view">
       <template #content>
-        <ranking-table v-if="!isFetching" :data="rankingData" :table-columns="rankingTableColumns">
+        <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
         </ranking-table>
         <skeleton-data-table v-else :table-columns="rankingTableColumns">
         </skeleton-data-table>
       </template>
       <template #footer>
-        <Button label="Load more" class="p-button-primary p-button-text cursor-pointer" />
+        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer" />
       </template>
     </Card>
   </div>
@@ -44,7 +44,8 @@ export default {
         'intGoalsAgainst',
         'intGoalDifference',
         'intPoints',
-      ]
+      ],
+      recordsToShow: 5
     }
   },
   mounted () {
@@ -101,6 +102,12 @@ export default {
           header: this.mapResponsePropsToTableHeaderFields(field)
         };
       });
+    },
+    shownRankingData() {
+      return this.rankingData.slice(0, this.recordsToShow);
+    },
+    loadMoreButtonIsShown () {
+      return this.rankingData.length > 0;
     }
   }
 }
