@@ -1,6 +1,6 @@
 <template>
-  <DataTable :value="rankingData">
-    <Column v-for="col of rankingTableColumns" :field="col.field" :header="col.header" :key="col.field">
+  <DataTable :value="data">
+    <Column v-for="col of tableColumns" :field="col.field" :header="col.header" :key="col.field">
       <template #body="slotProps">
         <img v-if="col.field === 'strTeamBadge'" :src="slotProps.data.strTeamBadge"
           :alt="`${slotProps.data.strTeam} crest`" />
@@ -30,11 +30,11 @@ export default {
       type: Boolean,
       required: true
     },
-    rankingData: {
+    data: {
       type: Array,
       default:  () => []
     },
-    rankingTableColumns: {
+    tableColumns: {
       type: Array,
       required: true
     }
