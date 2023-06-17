@@ -33,60 +33,10 @@ export default {
     rankingData: {
       type: Array,
       default:  () => []
-    }
-  },
-  data () {
-    return {
-      visibleFields: [
-        'intRank',
-        'strTeamBadge',
-        'strTeam',
-        'strForm',
-        'intPlayed',
-        'intWin',
-        'intDraw',
-        'intLoss',
-        'intGoalsFor',
-        'intGoalsAgainst',
-        'intGoalDifference',
-        'intPoints',
-      ]
-    }
-  },
-  methods: {
-    mapResponsePropsToTableHeaderFields (field) {
-      switch (field) {
-        case 'intGoalsAgainst':
-          return 'GA';
-        case 'intPoints':
-          return 'Pts';
-        case 'intGoalDifference':
-          return 'GD';
-        case 'intPlayed':
-          return 'GP';
-        case 'intGoalsFor':
-          return 'GF';
-        case 'intDraw':
-          return 'D';
-        case 'intLoss':
-          return 'L';
-        case 'intWin':
-          return 'W';
-        case 'strForm':
-          return 'Form';
-        default:
-          return '';
-      }
-    }
-  },
-  computed: {
-    rankingTableColumns () {
-      return this.visibleFields.map((field) => {
-        return {
-          field,
-          header: this.mapResponsePropsToTableHeaderFields(field)
-        };
-      });
+    },
+    rankingTableColumns: {
+      type: Array,
+      required: true
     }
   }
 }

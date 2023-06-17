@@ -1,7 +1,8 @@
 <template>
   <ranking-table
     :is-fetching="isFetching"
-    :ranking-data="rankingData">
+    :ranking-data="rankingData"
+    :ranking-table-columns="rankingTableColumns">
   </ranking-table>
 </template>
 <script>
@@ -16,6 +17,20 @@ export default {
     return {
       rankingData: [],
       isFetching: false,
+      visibleFields: [
+        'intRank',
+        'strTeamBadge',
+        'strTeam',
+        'strForm',
+        'intPlayed',
+        'intWin',
+        'intDraw',
+        'intLoss',
+        'intGoalsFor',
+        'intGoalsAgainst',
+        'intGoalDifference',
+        'intPoints',
+      ]
     }
   },
   mounted () {
@@ -37,6 +52,40 @@ export default {
       const parsedResponse = await response.json();
       this.rankingData = [...parsedResponse.table];
     },
+    mapResponsePropsToTableHeaderFields (field) {
+      switch (field) {
+        case 'intGoalsAgainst':
+          return 'GA';
+        case 'intPoints':
+          return 'Pts';
+        case 'intGoalDifference':
+          return 'GD';
+        case 'intPlayed':
+          return 'GP';
+        case 'intGoalsFor':
+          return 'GF';
+        case 'intDraw':
+          return 'D';
+        case 'intLoss':
+          return 'L';
+        case 'intWin':
+          return 'W';
+        case 'strForm':
+          return 'Form';
+        default:
+          return '';
+      }
+    }
   },
+  computed: {
+    rankingTableColumns () {
+      return this.visibleFields.map((field) => {
+        return {
+          field,
+          header: this.mapResponsePropsToTableHeaderFields(field)
+        };
+      });
+    }
+  }
 }
 </script>
