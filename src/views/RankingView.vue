@@ -1,12 +1,12 @@
 <template>
-      <ranking-table-vue></ranking-table-vue>
+      <ranking-table></ranking-table>
 </template>
 <script>
-import RankingTableVue from '../components/RankingTable.vue';
+import RankingTable from '../components/RankingTable.vue';
 export default {
   name: 'RankingView',
   components: {
-    RankingTableVue
+    RankingTable
   }
 }
 </script>
