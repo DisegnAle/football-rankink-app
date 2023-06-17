@@ -15,7 +15,6 @@
   </DataTable>
 </template>
 <script>
-import apis from '@/constants/apis';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import FormIcon from './FormIcon.vue';
@@ -26,10 +25,18 @@ export default {
     Column,
     FormIcon
   },
+  props: {
+    isFetching: {
+      type: Boolean,
+      required: true
+    },
+    rankingData: {
+      type: Array,
+      default:  () => []
+    }
+  },
   data () {
     return {
-      rankingData: [],
-      isFetching: false,
       visibleFields: [
         'intRank',
         'strTeamBadge',
@@ -46,25 +53,7 @@ export default {
       ]
     }
   },
-  mounted () {
-    this.fetchData();
-  },
   methods: {
-    onFetchData () {
-      try {
-        this.isFetching = true;
-        this.fetchData();
-      } catch (e) {
-        console.error(e);
-      } finally {
-        this.isFetching = false;
-      }
-    },
-    async fetchData () {
-      const response = await fetch(apis.RANKING);
-      const parsedResponse = await response.json();
-      this.rankingData = [...parsedResponse.table];
-    },
     mapResponsePropsToTableHeaderFields (field) {
       switch (field) {
         case 'intGoalsAgainst':
