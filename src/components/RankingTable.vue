@@ -1,27 +1,17 @@
 <template>
   <DataTable :value="rankingData">
-    <Column field="intRank">
-    </Column>
-    <Column field="strTeamBadge">
+    <Column v-for="col of rankingTableColumns" :field="col.field" :header="col.header" :key="col.field">
       <template #body="slotProps">
-        <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
-      </template>
-    </Column>
-    <Column field="strTeam"></Column>
-    <Column field="strTeamBadge">
-      <template #body="slotProps">
-        <form-icon v-for="(icon, index) in slotProps.data.strForm.split('')" :key="`${icon}-${index}`" :form-type="icon">
+        <img v-if="col.field === 'strTeamBadge'" :src="slotProps.data.strTeamBadge"
+          :alt="`${slotProps.data.strTeam} crest`" />
+        <form-icon v-else-if="col.field === 'strForm'" v-for="(icon, index) in slotProps.data.strForm.split('')"
+          :key="`${icon}-${index}`" :form-type="icon">
         </form-icon>
+        <span v-else>
+          {{ slotProps.data[col.field] }}
+        </span>
       </template>
     </Column>
-    <Column field="intPlayed" header="GP"></Column>
-    <Column field="intWin" header="W"></Column>
-    <Column field="intDraw" header="D"></Column>
-    <Column field="intLoss" header="L"></Column>
-    <Column field="intGoalsFor" header="GF"></Column>
-    <Column field="intGoalsAgainst" header="GA"></Column>
-    <Column field="intGoalDifference" header="GD"></Column>
-    <Column field="intPoints" header="Pts"></Column>
   </DataTable>
 </template>
 <script>
@@ -103,11 +93,11 @@ export default {
   computed: {
     rankingTableColumns () {
       return this.visibleFields.map((field) => {
-          return {
-            field,
-            header: this.mapResponsePropsToTableHeaderFields(field)
-          };
-        });
+        return {
+          field,
+          header: this.mapResponsePropsToTableHeaderFields(field)
+        };
+      });
     }
   }
 }
