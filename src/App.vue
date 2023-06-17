@@ -20,4 +20,5 @@ export default {
 <style>
 @import './assets/themes/material/theme.css';
 @import '/node_modules/primeflex/primeflex.css';
+@import '/node_modules/primeicons/primeicons.css';
 </style>
