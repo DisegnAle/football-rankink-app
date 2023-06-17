@@ -1,6 +1,7 @@
 <template>
-  <div class="form-icon" :class="`form-icon--bg-${formIconBgCssClass}`">
-    <i class="pi" :class="`pi-${iconTypeCssClass}`"></i>
+  <div class="form-icon" :class="`form-icon--bg-${iconCssClass.bgColor}`">
+    <i class="pi" :class="`pi-${iconCssClass.iconType}`">
+    </i>
   </div>
 </template>
 <script>
@@ -8,24 +9,14 @@ export default {
   name: 'FormIcon',
   props: ['formType'],
   computed: {
-    iconTypeCssClass: function () {
+    iconCssClass: function () {
       switch (this.formType) {
         case 'D':
-          return 'minus';
+          return { iconType: 'minus', bgColor: 'gray' };
         case 'L':
-          return 'times';
+          return { iconType: 'times', bgColor: 'red' };
         default:
-          return 'check';
-      }
-    },
-    formIconBgCssClass: function () {
-      switch (this.formType) {
-        case 'D':
-          return 'gray';
-        case 'L':
-          return 'red';
-        default:
-          return 'green';
+          return { iconType: 'check', bgColor: 'green' };
       }
     }
   }
