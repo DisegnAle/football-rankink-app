@@ -6,7 +6,7 @@
           <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
         </div>
         <div v-else-if="col.field === 'strForm'">
-          <form-icon v-for="icon in slotProps.data.strForm.split('')" :key="`${icon}-${index}`" :form-type="icon">
+          <form-icon v-for="(icon, index) in slotProps.data.strForm.split('')" :key="`${icon}-${index}`" :form-type="icon">
           </form-icon>
         </div>
         <span v-else>
