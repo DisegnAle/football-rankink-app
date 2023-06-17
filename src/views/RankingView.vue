@@ -1,6 +1,9 @@
 <template>
-  <div>
     <Card class="fr-ranking-view__card">
+      <template #header>
+        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
+          @click="onLoadMoreButtonClick" />
+      </template>
       <template #content>
         <div ref="cardContentInner">
           <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
@@ -9,12 +12,7 @@
           </skeleton-data-table>
         </div>
       </template>
-      <template #footer>
-        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
-          @click="onLoadMoreButtonClick" />
-      </template>
     </Card>
-  </div>
 </template>
 <script>
 import RankingTable from '@/components/RankingTable.vue';
@@ -143,8 +141,9 @@ export default {
 <style lang="scss">
 .fr-ranking-view__card {
   .p-card-content {
-    max-height: 70vh;
-    overflow-y: scroll;
+    max-height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
   }
 }
 </style>
