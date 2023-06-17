@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted () {
-    this.fetchData();
+    this.onFetchData();
   },
   methods: {
     onFetchData () {
@@ -52,7 +52,9 @@ export default {
       } catch (e) {
         console.error(e);
       } finally {
-        this.isFetching = false;
+        setTimeout(() => {
+          this.isFetching = false;
+        }, 1000);
       }
     },
     async fetchData () {
