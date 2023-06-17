@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import Ranking from './views/Ranking.vue';
+import Ranking from './views/RankingView.vue';
 export default {
   name: 'App',
   components: {
