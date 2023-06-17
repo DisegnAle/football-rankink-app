@@ -1,6 +1,6 @@
 <template>
-  <div class="form-icon" :class="`form-icon--bg-${iconCssClass.bgColor}`">
-    <i class="pi" :class="`pi-${iconCssClass.iconType}`">
+  <div class="form-icon" :class="`form-icon--bg-${iconCssClasses.bgColor}`">
+    <i class="pi" :class="`pi-${iconCssClasses.iconType}`">
     </i>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
     }
   },
   computed: {
-    iconCssClass: function () {
+    iconCssClasses: function () {
       switch (this.formType) {
         case 'D':
           return { iconType: 'minus', bgColor: 'gray' };
