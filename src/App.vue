@@ -2,17 +2,17 @@
   <div id="app">
     <div class="p-grid">
       <div class="p-col">
-        <Ranking></Ranking>
+        <ranking-view></ranking-view>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Ranking from './views/RankingView.vue';
+import RankingView from './views/RankingView.vue';
 export default {
   name: 'App',
   components: {
-    Ranking
+    RankingView
   }
 }
 </script>
