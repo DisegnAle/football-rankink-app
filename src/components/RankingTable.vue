@@ -1,6 +1,7 @@
 <template>
-    <DataTable v-if="rankingData" :value="rankingData">
-      <Column field="intRank"></Column>
+    <DataTable :value="rankingData">
+      <Column field="intRank">
+      </Column>
       <Column field="strTeamBadge">
         <template #body="slotProps">
             <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
