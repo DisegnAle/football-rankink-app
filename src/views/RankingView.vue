@@ -1,14 +1,17 @@
 <template>
   <div>
-    <Card class="fr-card__ranking-view">
+    <Card class="fr-ranking-view__card">
       <template #content>
-        <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
-        </ranking-table>
-        <skeleton-data-table v-else :table-columns="rankingTableColumns">
-        </skeleton-data-table>
+        <div ref="cardContentInner">
+          <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
+          </ranking-table>
+          <skeleton-data-table v-else :table-columns="rankingTableColumns">
+          </skeleton-data-table>
+        </div>
       </template>
       <template #footer>
-        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer" />
+        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
+          @click="onLoadMoreButtonClick" />
       </template>
     </Card>
   </div>
@@ -92,6 +95,30 @@ export default {
         default:
           return '';
       }
+    },
+    updateRecordsToShow() {
+      if (this.recordsToShow + 3 >= this.rankingData.length) {
+        this.recordsToShow = this.rankingData.length;
+      } else {
+        this.recordsToShow += 3;
+      }
+    },
+    onLoadMoreButtonClick () {
+      if (this.recordsToShow.length === this.rankingData.length) {
+        return;
+      }
+
+      this.updateRecordsToShow();
+      this.scrollToLastItem();
+    },
+    scrollToLastItem () {
+      setTimeout(() => {
+        this.$refs.cardContentInner.scrollIntoView({
+          block: 'end',
+          inline: 'nearest',
+          behavior: 'smooth'
+        });
+      }, 300);
     }
   },
   computed: {
@@ -103,21 +130,21 @@ export default {
         };
       });
     },
-    shownRankingData() {
+    shownRankingData () {
       return this.rankingData.slice(0, this.recordsToShow);
     },
     loadMoreButtonIsShown () {
-      return this.rankingData.length > 0;
+      return this.rankingData.length > 0 && this.recordsToShow !== this.rankingData.length;
     }
   }
 }
 </script>
 
 <style lang="scss">
-.fr-card__ranking-view {
+.fr-ranking-view__card {
   .p-card-content {
-    max-height: 90vh;
-    overflow: auto;
+    max-height: 70vh;
+    overflow-y: scroll;
   }
 }
 </style>

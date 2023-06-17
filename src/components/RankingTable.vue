@@ -2,11 +2,13 @@
   <DataTable :value="data" class="p-datatable-sm">
     <Column v-for="col of tableColumns" :field="col.field" :header="col.header" :key="col.field">
       <template #body="slotProps">
-        <img v-if="col.field === 'strTeamBadge'" :src="slotProps.data.strTeamBadge"
-          :alt="`${slotProps.data.strTeam} crest`" />
-        <form-icon v-else-if="col.field === 'strForm'" v-for="(icon, index) in slotProps.data.strForm.split('')"
-          :key="`${icon}-${index}`" :form-type="icon">
-        </form-icon>
+        <div v-if="col.field === 'strTeamBadge'">
+          <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
+        </div>
+        <div v-else-if="col.field === 'strForm'">
+          <form-icon v-for="icon in slotProps.data.strForm.split('')" :key="`${icon}-${index}`" :form-type="icon">
+          </form-icon>
+        </div>
         <span v-else>
           {{ slotProps.data[col.field] }}
         </span>
@@ -28,7 +30,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default:  () => []
+      default: () => []
     },
     tableColumns: {
       type: Array,
