@@ -10,8 +10,8 @@
       <Column field="strTeamBadge">
         <template #body="slotProps">
             <form-icon
-              v-for="icon in slotProps.data.strForm.split('')"
-              :key="icon"
+              v-for="(icon, index) in slotProps.data.strForm.split('')"
+              :key="`${icon}-${index}`"
               :form-type="icon">
             </form-icon>
         </template>
