@@ -1,5 +1,5 @@
 <template>
-  <DataTable :value="data">
+  <DataTable :value="data" class="p-datatable-sm">
     <Column v-for="col of tableColumns" :field="col.field" :header="col.header" :key="col.field">
       <template #body="slotProps">
         <img v-if="col.field === 'strTeamBadge'" :src="slotProps.data.strTeamBadge"
