@@ -1,5 +1,5 @@
 <template>
-  <div class="form-icon" :class="`form-icon--bg-${iconCssClasses.bgColor}`">
+  <div class="fr-form-icon" :class="`fr-form-icon--bg-${iconCssClasses.bgColor}`">
     <i class="pi" :class="`pi-${iconCssClasses.iconType}`">
     </i>
   </div>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-.form-icon {
+.fr-form-icon {
   display: inline-block;
   border-radius: 60px;
   padding: 0.5em 0.6em;
