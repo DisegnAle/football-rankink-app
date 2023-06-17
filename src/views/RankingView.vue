@@ -1,23 +1,29 @@
 <template>
   <div>
-    <ranking-table
-      v-if="!isFetching"
-      :data="rankingData"
-      :table-columns="rankingTableColumns">
-    </ranking-table>
-    <skeleton-data-table
-      v-else
-      :table-columns="rankingTableColumns">
-    </skeleton-data-table>
+    <Card class="fr-card__ranking-view">
+      <template #content>
+        <ranking-table v-if="!isFetching" :data="rankingData" :table-columns="rankingTableColumns">
+        </ranking-table>
+        <skeleton-data-table v-else :table-columns="rankingTableColumns">
+        </skeleton-data-table>
+      </template>
+      <template #footer>
+        <Button label="Load more" class="p-button-primary p-button-text cursor-pointer" />
+      </template>
+    </Card>
   </div>
 </template>
 <script>
 import RankingTable from '@/components/RankingTable.vue';
 import SkeletonDataTable from '@/components/SkeletonDataTable.vue';
 import apis from '@/constants/apis';
+import Button from 'primevue/button';
+import Card from 'primevue/card';
 export default {
   name: 'RankingView',
   components: {
+    Card,
+    Button,
     RankingTable,
     SkeletonDataTable
   },
@@ -99,3 +105,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.fr-card__ranking-view {
+  .p-card-content {
+    max-height: 90vh;
+    overflow: auto;
+  }
+}
+</style>
