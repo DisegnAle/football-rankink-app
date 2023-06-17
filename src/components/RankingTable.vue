@@ -62,7 +62,6 @@ export default {
       const response = await fetch(apis.RANKING);
       const parsedResponse = await response.json();
       this.rankingData = [...parsedResponse.table ];
-      console.log(this.rankingData);
     }
   }
 }
