@@ -1,8 +1,15 @@
 <template>
   <Card class="fr-ranking-view__card">
     <template #header>
-      <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
-        @click="onLoadMoreButtonClick" />
+      <div class="gridnogutter fr-ranking-view__card-header">
+        <div class="col-12">
+          <Button
+            v-if="loadMoreButtonIsShown"
+            label="Load more"
+            class="p-button-primary p-button-text cursor-pointer"
+            @click="onLoadMoreButtonClick" />
+        </div>
+      </div>
     </template>
     <template #content>
       <div ref="cardContentInner">
@@ -151,6 +158,10 @@ export default {
 
 <style lang="scss">
 .fr-ranking-view__card {
+  &-header{
+    min-height: 40px;
+  }
+
   .p-card-content {
     max-height: 90vh;
     overflow: scroll;
@@ -159,6 +170,7 @@ export default {
 
 @media screen and (min-width: 1200px) {
   .fr-ranking-view__card {
+    min-height: 75vh;
     .p-card-content {
       max-height: 75vh;
     }
