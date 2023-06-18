@@ -1,16 +1,28 @@
 <template>
+  <!--
+    Card component - Available in Primevue library
+  -->
   <Card class="fr-ranking-view__card">
     <template #header>
-      <div class="p-col-12">
+      <div v-if="isCardHeaderContentShown" class="p-col-12">
         <div class="p-grid p-p-2 fr-ranking-view__card-header">
+          <!--
+            InputText component - Available in Primevue library
+            Used for filtering in the datatable against the teams' names
+          -->
           <div class="p-mr-2">
             <span class="p-input-icon-left">
               <i class="pi pi-filter" />
               <InputText class="p-inputtext-sm" v-model="rankingTableFilter" placeholder="Team club name" />
             </span>
           </div>
+          <!--
+            Button component - Available in Primevue library
+            Used for loading more records in the datatable
+            @event click
+          -->
           <div>
-            <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
+            <Button v-if="isLoadMoreButtonShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
               @click="onLoadMoreButtonClick" />
           </div>
         </div>
@@ -18,9 +30,17 @@
     </template>
     <template #content>
       <div ref="cardContentInner">
+        <!--
+            RankingTable component
+            Used for showing fetched data
+          -->
         <ranking-table v-if="!isFetching" :data="rankingDataShown" :table-columns="rankingTableColumns"
           :table-filter="rankingTableFilter">
         </ranking-table>
+        <!--
+            SkeletonDataTable component
+            Used for showing a skeleton while the data is being fetched
+          -->
         <skeleton-data-table v-else :table-columns="rankingTableColumns">
         </skeleton-data-table>
       </div>
@@ -69,6 +89,10 @@ export default {
     this.onFetchData();
   },
   methods: {
+    /**
+    * Calls the fetchData fn and set the isFetching property
+    *
+    */
     onFetchData () {
       try {
         this.isFetching = true;
@@ -76,16 +100,30 @@ export default {
       } catch (e) {
         console.error(e);
       } finally {
+        // Timeout set for demo purposes
+        // Normally, since the time for fetching data is very short
+        // the skeleton would barely be visible
         setTimeout(() => {
           this.isFetching = false;
-        }, 1000);
+        }, 2000);
       }
     },
+    /**
+    * Calls the native fetch fn and when it receives the response
+    * it sets the rankingData equals to the response received.
+    *
+    */
     async fetchData () {
       const response = await fetch(apis.RANKING);
       const parsedResponse = await response.json();
       this.rankingData = [...parsedResponse.table];
     },
+    /**
+    * Maps the properties of the fetched records to the visible headers
+    * in the datatable columns.
+    *
+    * @param {string} field
+    */
     mapResponsePropsToTableHeaderFields (field) {
       switch (field) {
         case 'intGoalsAgainst':
@@ -110,6 +148,14 @@ export default {
           return '';
       }
     },
+    /**
+    * The records to show are by default set to 5.
+    * Everytime the users clicks on the "load more" button, it adds 3 to the
+    * recordsToShow.
+    * If the recordsToShow is greater than or equal to the fetched rankingData,
+    * it automatically assign it to the rankingData.
+    *
+    */
     updateRecordsToShow () {
       if (this.recordsToShow + 3 >= this.rankingData.length) {
         this.recordsToShow = this.rankingData.length;
@@ -117,6 +163,10 @@ export default {
         this.recordsToShow += 3;
       }
     },
+    /**
+    * Triggered by the "load more" button click
+    *
+    */
     onLoadMoreButtonClick () {
       if (this.recordsToShow.length === this.rankingData.length) {
         return;
@@ -125,6 +175,11 @@ export default {
       this.updateRecordsToShow();
       this.scrollTo();
     },
+    /**
+    * It scrolls the datatable container to the bottom
+    * (only on large devices)
+    *
+    */
     scrollToBottom () {
       this.$refs.cardContentInner.scrollIntoView({
         block: 'end',
@@ -132,10 +187,21 @@ export default {
         behavior: 'smooth'
       });
     },
+    /**
+    * It scrolls the datatable container to first of the new three shown records
+    * (only on small devices)
+    *
+    */
     scrollToItem () {
       const item = document.getElementById(`row-${this.recordsToShow - 2}`);
       item.scrollIntoView({ behavior: 'smooth' }, true);
     },
+    /**
+    * Since, when the user clicks on the "load more" button, he should scroll to
+    * view the new displayed records, this function automatically manage
+    * the scrolling logic.
+    *
+    */
     scrollTo () {
       setTimeout(() => {
         if (window.innerWidth >= 961) {
@@ -150,6 +216,12 @@ export default {
     }
   },
   computed: {
+    /**
+    * It dinamically generates an array of objects, passed to the datatables
+    * Every objects, contain the field (property) of the fetched data and the
+    * header shown in the datatable headers.
+    *
+    */
     rankingTableColumns () {
       return this.visibleFields.map((field) => {
         return {
@@ -158,11 +230,29 @@ export default {
         };
       });
     },
+    /**
+    * It reduces the shown ranking data according to the records to show.
+    *
+    */
     rankingDataShown () {
       return this.rankingData.slice(0, this.recordsToShow);
     },
-    loadMoreButtonIsShown () {
-      return this.rankingData.length > 0 && this.recordsToShow !== this.rankingData.length;
+    /**
+    * It determines whether to show the card header content
+    * (filter and load more button).
+    *
+    */
+    isCardHeaderContentShown () {
+      return this.isLoadMoreButtonShown &&
+        this.isFetching === false;
+    },
+    /**
+    * It determines whether to show the "load more" button
+    *
+    */
+    isLoadMoreButtonShown () {
+      return this.rankingData.length > 0 &&
+        this.recordsToShow !== this.rankingData.length;
     }
   }
 }
@@ -195,7 +285,7 @@ export default {
     min-height: 75vh;
 
     .p-card-content {
-      max-height: 60vh;
+      max-height: 75vh;
     }
   }
 }
