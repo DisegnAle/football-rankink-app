@@ -244,8 +244,7 @@ export default {
      *
      */
     isCardHeaderContentShown () {
-      return this.isLoadMoreButtonShown &&
-        this.isFetching === false;
+      return this.isFetching === false;
     },
     /**
      * It determines whether to show the "load more" button
@@ -287,6 +286,19 @@ export default {
 
     .p-card-content {
       max-height: 75vh;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px){
+  .fr-ranking-view__card {
+    &-header {
+      background: var(--surface-a);
+      position: fixed;
+      z-index: 2;
+      width: 100%;
+      top: 1%;
+      left: 1%;
     }
   }
 }
