@@ -4,7 +4,7 @@
   -->
   <Card class="fr-ranking-view__card">
     <template #header>
-      <div v-if="isCardHeaderContentShown" class="p-col-12">
+      <div v-if="this.isFetching === false" class="p-col-12">
         <div class="p-grid p-p-2 fr-ranking-view__card-header">
           <!--
             InputText component - Available in Primevue library
@@ -237,14 +237,6 @@ export default {
      */
     rankingDataShown () {
       return this.rankingData.slice(0, this.recordsToShow);
-    },
-    /**
-     * It determines whether to show the card header content
-     * (filter and load more button).
-     *
-     */
-    isCardHeaderContentShown () {
-      return this.isFetching === false;
     },
     /**
      * It determines whether to show the "load more" button
