@@ -2,12 +2,14 @@
   <!--
     Datatable component - Available in Primevue library
   -->
-  <DataTable removableSort :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
+  <DataTable removableSort stripedRows :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
     <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :header="col.header"
       :key="col.field">
       <!--
-        Custom templates used for the team badges,
-        the form field and to assign an id to the intRank field <span>
+        Custom templates used for
+        the team badges,
+        the form field
+        and to assign an "id" to the "intRank" field
       -->
       <template #body="slotProps">
         <div v-if="col.field === 'strTeamBadge'">
