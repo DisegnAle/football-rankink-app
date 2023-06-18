@@ -1,8 +1,11 @@
 <template>
-  <div class="fr-form-icon" :class="`fr-form-icon--bg-${iconCssClasses.bgColor}`">
-    <i class="pi" :class="`pi-${iconCssClasses.iconType}`">
+    <i
+      class="pi fr-form-icon"
+      :class="[
+        `pi-${iconCssClasses.iconType}`,
+        `fr-form-icon--bg-${iconCssClasses.bgColor}`
+      ]">
     </i>
-  </div>
 </template>
 <script>
 export default {
@@ -17,7 +20,7 @@ export default {
     iconCssClasses: function () {
       switch (this.formType) {
         case 'D':
-          return { iconType: 'minus', bgColor: 'gray' };
+          return { iconType: 'minus', bgColor: 'orange' };
         case 'L':
           return { iconType: 'times', bgColor: 'red' };
         default:
@@ -29,24 +32,39 @@ export default {
 </script>
 
 <style lang="scss">
+$green: #7EB77F;
+$red: #DB5461;
+$orange: #FA9F42;
+
 .fr-form-icon {
   display: inline-block;
-  border-radius: 60px;
-  padding: 0.5em 0.6em;
-  margin-right: 10px;
+  border-radius: 50%;
+  padding: 0.6em 0.6em;
+  margin-right: 5px;
   color: var(--surface-0);
+  &.pi{
+    font-size: 0.6em;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-right: 10px;
+    &.pi {
+      font-size: 0.8em;
+    }
+  }
+
 
   &--bg {
     &-green {
-      background: #7EB77F;
+      background: $green;
     }
 
     &-red {
-      background: #DB5461;
+      background: $red;
     }
 
-    &-gray {
-      background: #FA9F42;
+    &-orange {
+      background: $orange;
     }
   }
 }
