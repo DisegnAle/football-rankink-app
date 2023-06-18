@@ -277,7 +277,7 @@ export default {
     min-height: 75vh;
 
     .p-card-content {
-      max-height: 75vh;
+      max-height: 50vh;
     }
   }
 }
