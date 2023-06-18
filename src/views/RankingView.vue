@@ -5,7 +5,7 @@
         <div class="p-grid p-p-2 fr-ranking-view__card-header">
           <div class="p-mr-2">
             <span class="p-input-icon-left">
-              <i class="pi pi-search" />
+              <i class="pi pi-filter" />
               <InputText class="p-inputtext-sm" v-model="rankingTableFilter" placeholder="Team club name" />
             </span>
           </div>
@@ -178,6 +178,15 @@ export default {
   .p-card-content {
     max-height: 90vh;
     overflow: scroll;
+  }
+
+  .p-input-icon-left {
+    position: relative;
+
+    i {
+      position: absolute;
+      top: 15%;
+    }
   }
 }
 
