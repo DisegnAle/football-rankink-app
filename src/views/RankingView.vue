@@ -1,17 +1,18 @@
 <template>
   <Card class="fr-ranking-view__card">
     <template #header>
-      <div class="gridnogutter fr-ranking-view__card-header">
-        <div class="col-12">
-          <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
-            @click="onLoadMoreButtonClick" />
-        </div>
-        <div class="p-grid p-justify-between p-align-center">
-          <span class="p-input-icon-left">
-            <i class="pi pi-search" />
-            <InputText class="p-inputtext-sm" v-model="rankingTableFilter"
-              placeholder="Team club name" />
-          </span>
+      <div class="p-col-12">
+        <div class="p-grid p-p-2 fr-ranking-view__card-header">
+          <div class="p-mr-2">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search" />
+              <InputText class="p-inputtext-sm" v-model="rankingTableFilter" placeholder="Team club name" />
+            </span>
+          </div>
+          <div>
+            <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
+              @click="onLoadMoreButtonClick" />
+          </div>
         </div>
       </div>
     </template>
@@ -170,7 +171,8 @@ export default {
 <style lang="scss">
 .fr-ranking-view__card {
   &-header {
-    min-height: 40px;
+    min-height: 65px;
+    justify-content: flex-start;
   }
 
   .p-card-content {
@@ -184,7 +186,7 @@ export default {
     min-height: 75vh;
 
     .p-card-content {
-      max-height: 75vh;
+      max-height: 60vh;
     }
   }
 }
