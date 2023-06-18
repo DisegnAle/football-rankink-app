@@ -90,9 +90,9 @@ export default {
   },
   methods: {
     /**
-    * Calls the fetchData fn and set the isFetching property
-    *
-    */
+     * Calls the fetchData fn and set the isFetching property
+     *
+     */
     onFetchData () {
       try {
         this.isFetching = true;
@@ -109,21 +109,21 @@ export default {
       }
     },
     /**
-    * Calls the native fetch fn and when it receives the response
-    * it sets the rankingData equals to the response received.
-    *
-    */
+     * Calls the native fetch fn and when it receives the response,
+     * it sets the rankingData equal to the response received.
+     *
+     */
     async fetchData () {
       const response = await fetch(apis.RANKING);
       const parsedResponse = await response.json();
       this.rankingData = [...parsedResponse.table];
     },
     /**
-    * Maps the properties of the fetched records to the visible headers
-    * in the datatable columns.
-    *
-    * @param {string} field
-    */
+     * It maps the properties of the fetched records to the visible headers
+     * in the datatable columns.
+     *
+     * @param {string} field
+     */
     mapResponsePropsToTableHeaderFields (field) {
       switch (field) {
         case 'intGoalsAgainst':
@@ -149,13 +149,13 @@ export default {
       }
     },
     /**
-    * The records to show are by default set to 5.
-    * Everytime the users clicks on the "load more" button, it adds 3 to the
-    * recordsToShow.
-    * If the recordsToShow is greater than or equal to the fetched rankingData,
-    * it automatically assign it to the rankingData.
-    *
-    */
+     * The records shown by default are set to 5.
+     * Everytime the users clicks on the "load more" button, it adds 3 to the
+     * recordsToShow.
+     * If the recordsToShow is greater than or equal to the fetched rankingData,
+     * it automatically assigns it to the rankingData.
+     *
+     */
     updateRecordsToShow () {
       if (this.recordsToShow + 3 >= this.rankingData.length) {
         this.recordsToShow = this.rankingData.length;
@@ -164,9 +164,9 @@ export default {
       }
     },
     /**
-    * Triggered by the "load more" button click
-    *
-    */
+     * Triggered by the "load more" button click event
+     *
+     */
     onLoadMoreButtonClick () {
       if (this.recordsToShow.length === this.rankingData.length) {
         return;
@@ -176,10 +176,10 @@ export default {
       this.scrollTo();
     },
     /**
-    * It scrolls the datatable container to the bottom
-    * (only on large devices)
-    *
-    */
+     * It scrolls the datatable container to the bottom
+     * (only on large devices)
+     *
+     */
     scrollToBottom () {
       this.$refs.cardContentInner.scrollIntoView({
         block: 'end',
@@ -188,20 +188,21 @@ export default {
       });
     },
     /**
-    * It scrolls the datatable container to first of the new three shown records
-    * (only on small devices)
-    *
-    */
+     * It scrolls the datatable container to the first of the new three shown
+     * records.
+     * (only on small devices)
+     *
+     */
     scrollToItem () {
       const item = document.getElementById(`row-${this.recordsToShow - 2}`);
       item.scrollIntoView({ behavior: 'smooth' }, true);
     },
     /**
-    * Since, when the user clicks on the "load more" button, he should scroll to
-    * view the new displayed records, this function automatically manage
-    * the scrolling logic.
-    *
-    */
+     * Since, when the user clicks on the "load more" button, he should scroll to
+     * view the new displayed records, this function automatically manages
+     * the scrolling logic.
+     *
+     */
     scrollTo () {
       setTimeout(() => {
         if (window.innerWidth >= 961) {
@@ -217,11 +218,11 @@ export default {
   },
   computed: {
     /**
-    * It dinamically generates an array of objects, passed to the datatables
-    * Every objects, contain the field (property) of the fetched data and the
-    * header shown in the datatable headers.
-    *
-    */
+     * It dinamically generates an array of objects, passed to the datatables.
+     * Every object contains the field (property) of the fetched data and the
+     * header shown in the datatable headers.
+     *
+     */
     rankingTableColumns () {
       return this.visibleFields.map((field) => {
         return {
@@ -231,25 +232,25 @@ export default {
       });
     },
     /**
-    * It reduces the shown ranking data according to the records to show.
-    *
-    */
+     * It reduces the shown ranking data according to the records to show.
+     *
+     */
     rankingDataShown () {
       return this.rankingData.slice(0, this.recordsToShow);
     },
     /**
-    * It determines whether to show the card header content
-    * (filter and load more button).
-    *
-    */
+     * It determines whether to show the card header content
+     * (filter and load more button).
+     *
+     */
     isCardHeaderContentShown () {
       return this.isLoadMoreButtonShown &&
         this.isFetching === false;
     },
     /**
-    * It determines whether to show the "load more" button
-    *
-    */
+     * It determines whether to show the "load more" button
+     *
+     */
     isLoadMoreButtonShown () {
       return this.rankingData.length > 0 &&
         this.recordsToShow !== this.rankingData.length;
