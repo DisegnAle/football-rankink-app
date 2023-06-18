@@ -32,7 +32,7 @@ export default {
   },
   props: {
     /**
-     * The columns that will be shown in the datatable
+     * The columns that will be shown in the datatable.
      * @type [{header: '', field: ''}]
      */
     tableColumns: {
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     /**
-    * It generates an objects composed by the properties shown in the datatable
+    * It generates an object composed by the properties/fields shown in the datatable.
     * Every field is assigned to an empty string.
     *
     */
@@ -54,8 +54,8 @@ export default {
       return newRow;
     },
     /**
-    * It generates an array of objects
-    * It will be used by the datatable to show the initial 5 skeleton rows
+    * It generates an array of objects.
+    * It will be used by the datatable to show the initial 5 datatable skeleton rows.
     *
     */
     generateStaticDataTableData () {

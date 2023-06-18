@@ -101,8 +101,8 @@ export default {
   },
   watch: {
     /**
-     * It updates the table filters, everytime the users changes the filter or
-     * clicks on the "load more" button
+     * It updates the table filter value (everytime the users changes the filter or
+     * clicks on the "load more" button)
      */
     tableFilter: function (newVal) {
       this.tableFilters['strTeam'].value = newVal;

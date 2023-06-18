@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     /**
-     * Calls the fetchData fn and set the isFetching property
+     * Calls the "fetchData" fn and set the "isFetching" property
      *
      */
     onFetchData () {
@@ -109,8 +109,8 @@ export default {
       }
     },
     /**
-     * Calls the native fetch fn and when it receives the response,
-     * it sets the rankingData equal to the response received.
+     * Calls the native "fetch" fn and when it receives the response,
+     * it sets the "rankingData" equal to the response received.
      *
      */
     async fetchData () {
@@ -152,8 +152,8 @@ export default {
      * The records shown by default are set to 5.
      * Everytime the users clicks on the "load more" button, it adds 3 to the
      * recordsToShow.
-     * If the recordsToShow is greater than or equal to the fetched rankingData,
-     * it automatically assigns it to the rankingData.
+     * If the "recordsToShow" is greater than or equal to the fetched "rankingData",
+     * it automatically assigns it to the "rankingData".
      *
      */
     updateRecordsToShow () {

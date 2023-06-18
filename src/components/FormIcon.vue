@@ -22,8 +22,8 @@ export default {
   },
   computed: {
     /**
-     * It determines some css classes according to the formType passes as a prop
-     * This classes will be used to set the type and the background color of
+     * It determines some css classes according to the formType passed as a prop
+     * These classes will be used to set the type and the background color of
      * the icon
      *
      */
