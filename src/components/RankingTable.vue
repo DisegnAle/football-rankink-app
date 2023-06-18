@@ -1,5 +1,5 @@
 <template>
-  <DataTable removableSort :value="data" class="p-datatable-sm fr-ranking-table">
+  <DataTable removableSort :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
     <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :header="col.header"
       :key="col.field">
       <template #body="slotProps">
@@ -22,6 +22,7 @@
   </DataTable>
 </template>
 <script>
+import { FilterMatchMode } from 'primevue/api/';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import FormIcon from './FormIcon.vue';
@@ -32,6 +33,13 @@ export default {
     Column,
     FormIcon
   },
+  data () {
+    return {
+      tableFilters: {
+        'strTeam': { value: null, matchMode: FilterMatchMode.CONTAINS },
+      }
+    }
+  },
   props: {
     data: {
       type: Array,
@@ -40,11 +48,20 @@ export default {
     tableColumns: {
       type: Array,
       required: true
-    }
+    },
+    tableFilter: {
+      type: String,
+      default: null
+    },
   },
   methods: {
     isSortingBtnShown (field) {
       return !['strTeamBadge', 'strForm', 'intPlayed', 'intRank', 'strTeam'].includes(field)
+    }
+  },
+  watch: {
+    tableFilter: function (newVal) {
+      this.tableFilters['strTeam'].value = newVal;
     }
   }
 }

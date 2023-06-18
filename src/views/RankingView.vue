@@ -3,17 +3,22 @@
     <template #header>
       <div class="gridnogutter fr-ranking-view__card-header">
         <div class="col-12">
-          <Button
-            v-if="loadMoreButtonIsShown"
-            label="Load more"
-            class="p-button-primary p-button-text cursor-pointer"
+          <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
             @click="onLoadMoreButtonClick" />
+        </div>
+        <div class="p-grid p-justify-between p-align-center">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search" />
+            <InputText class="p-inputtext-sm" v-model="rankingTableFilter"
+              placeholder="Team club name" />
+          </span>
         </div>
       </div>
     </template>
     <template #content>
       <div ref="cardContentInner">
-        <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
+        <ranking-table v-if="!isFetching" :data="rankingDataShown" :table-columns="rankingTableColumns"
+          :table-filter="rankingTableFilter">
         </ranking-table>
         <skeleton-data-table v-else :table-columns="rankingTableColumns">
         </skeleton-data-table>
@@ -27,11 +32,13 @@ import SkeletonDataTable from '@/components/SkeletonDataTable.vue';
 import apis from '@/constants/apis';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
 export default {
   name: 'RankingView',
   components: {
     Card,
     Button,
+    InputText,
     RankingTable,
     SkeletonDataTable
   },
@@ -53,7 +60,8 @@ export default {
         'intGoalDifference',
         'intPoints',
       ],
-      recordsToShow: 5
+      recordsToShow: 5,
+      rankingTableFilter: null,
     }
   },
   mounted () {
@@ -112,7 +120,7 @@ export default {
       if (this.recordsToShow.length === this.rankingData.length) {
         return;
       }
-
+      this.resetRankingTableFilter();
       this.updateRecordsToShow();
       this.scrollTo();
     },
@@ -135,6 +143,9 @@ export default {
           this.scrollToItem();
         }
       }, 300);
+    },
+    resetRankingTableFilter () {
+      this.rankingTableFilter = null;
     }
   },
   computed: {
@@ -146,7 +157,7 @@ export default {
         };
       });
     },
-    shownRankingData () {
+    rankingDataShown () {
       return this.rankingData.slice(0, this.recordsToShow);
     },
     loadMoreButtonIsShown () {
@@ -158,7 +169,7 @@ export default {
 
 <style lang="scss">
 .fr-ranking-view__card {
-  &-header{
+  &-header {
     min-height: 40px;
   }
 
@@ -171,6 +182,7 @@ export default {
 @media screen and (min-width: 1200px) {
   .fr-ranking-view__card {
     min-height: 75vh;
+
     .p-card-content {
       max-height: 75vh;
     }
