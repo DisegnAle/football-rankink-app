@@ -154,7 +154,6 @@ export default {
   .p-card-content {
     max-height: 75vh;
     overflow: scroll;
-    overflow-x: hidden;
   }
 }
 </style>
