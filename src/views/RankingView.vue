@@ -4,7 +4,7 @@
   -->
   <Card class="fr-ranking-view__card">
     <template #header>
-      <div v-if="this.isFetching === false" class="p-col-12">
+      <div v-if="isFetching === false" class="p-col-12">
         <div class="p-grid p-p-2 fr-ranking-view__card-header">
           <!--
             InputText component - Available in Primevue library
