@@ -51,20 +51,6 @@ export default {
 </script>
 
 <style lang="scss">
-.fr-ranking-table {
-  &.p-datatable {
-    .p-datatable-tbody {
-      &>tr {
-        &>td {
-          .p-column-title {
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 960px) {
   .fr-ranking-table {
     &.p-datatable.p-datatable-sm {
