@@ -1,7 +1,7 @@
 <template>
   <div class="fr">
     <div class="p-grid fr__ranking-view-container">
-      <div class="p-col-11">
+      <div class="p-col-12 lg:col-11">
         <ranking-view></ranking-view>
       </div>
     </div>
@@ -23,7 +23,6 @@ export default {
 @import '/node_modules/primeicons/primeicons.css';
 
 @media screen and (min-width: 769px) {
-
   html,
   body,
   .fr {
