@@ -152,8 +152,16 @@ export default {
 <style lang="scss">
 .fr-ranking-view__card {
   .p-card-content {
-    max-height: 75vh;
+    max-height: 90vh;
     overflow: scroll;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .fr-ranking-view__card {
+    .p-card-content {
+      max-height: 75vh;
+    }
   }
 }
 </style>

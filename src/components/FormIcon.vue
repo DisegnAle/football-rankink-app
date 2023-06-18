@@ -46,7 +46,7 @@ $orange: #FA9F42;
     font-size: 0.6em;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1200px) {
     margin-right: 10px;
     &.pi {
       font-size: 0.8em;
