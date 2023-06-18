@@ -22,20 +22,23 @@ export default {
 @import '/node_modules/primeflex/primeflex.css';
 @import '/node_modules/primeicons/primeicons.css';
 
+html,
+body,
 .fr {
-    background: var(--surface-a);
+  height: 100%;
+  background: var(--surface-a);
 }
 
 @media screen and (min-width: 1200px) {
+
   html,
   body,
   .fr {
     height: 100%;
+    background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
   }
 
   .fr {
-    background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
-
     &__ranking-view-container {
       height: 100%;
       align-content: center;
