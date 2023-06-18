@@ -11,12 +11,22 @@
 export default {
   name: 'FormIcon',
   props: {
+    /**
+      * The size of the button
+      * @values W, D, L
+      */
     formType: {
       type: String,
       required: true
     }
   },
   computed: {
+    /**
+     * It determines some css classes according to the formType passes as a prop
+     * This classes will be used to set the type and the background color of
+     * the icon
+     *
+     */
     iconCssClasses: function () {
       switch (this.formType) {
         case 'D':
