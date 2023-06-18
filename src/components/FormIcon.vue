@@ -38,15 +38,15 @@ export default {
 
   &--bg {
     &-green {
-      background: var(--green-300);
+      background: #7EB77F;
     }
 
     &-red {
-      background: var(--red-300);
+      background: #DB5461;
     }
 
     &-gray {
-      background: var(--surface-500);
+      background: #FA9F42;
     }
   }
 }

@@ -9,7 +9,7 @@
           <form-icon v-for="(icon, index) in slotProps.data.strForm.split('')" :key="`${icon}-${index}`" :form-type="icon">
           </form-icon>
         </div>
-        <span v-else>
+        <span :id="col.field === 'intRank' ? `row-${slotProps.data.intRank}` : ''" v-else>
           {{ slotProps.data[col.field] }}
         </span>
       </template>

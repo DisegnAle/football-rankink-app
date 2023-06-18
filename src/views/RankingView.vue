@@ -1,18 +1,18 @@
 <template>
-    <Card class="fr-ranking-view__card">
-      <template #header>
-        <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
-          @click="onLoadMoreButtonClick" />
-      </template>
-      <template #content>
-        <div ref="cardContentInner">
-          <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
-          </ranking-table>
-          <skeleton-data-table v-else :table-columns="rankingTableColumns">
-          </skeleton-data-table>
-        </div>
-      </template>
-    </Card>
+  <Card class="fr-ranking-view__card">
+    <template #header>
+      <Button v-if="loadMoreButtonIsShown" label="Load more" class="p-button-primary p-button-text cursor-pointer"
+        @click="onLoadMoreButtonClick" />
+    </template>
+    <template #content>
+      <div ref="cardContentInner">
+        <ranking-table v-if="!isFetching" :data="shownRankingData" :table-columns="rankingTableColumns">
+        </ranking-table>
+        <skeleton-data-table v-else :table-columns="rankingTableColumns">
+        </skeleton-data-table>
+      </div>
+    </template>
+  </Card>
 </template>
 <script>
 import RankingTable from '@/components/RankingTable.vue';
@@ -94,7 +94,7 @@ export default {
           return '';
       }
     },
-    updateRecordsToShow() {
+    updateRecordsToShow () {
       if (this.recordsToShow + 3 >= this.rankingData.length) {
         this.recordsToShow = this.rankingData.length;
       } else {
@@ -107,15 +107,26 @@ export default {
       }
 
       this.updateRecordsToShow();
-      this.scrollToLastItem();
+      this.scrollTo();
     },
-    scrollToLastItem () {
+    scrollToBottom () {
+      this.$refs.cardContentInner.scrollIntoView({
+        block: 'end',
+        inline: 'nearest',
+        behavior: 'smooth'
+      });
+    },
+    scrollToItem () {
+      const item = document.getElementById(`row-${this.recordsToShow - 2}`);
+      item.scrollIntoView({ behavior: 'smooth' }, true);
+    },
+    scrollTo () {
       setTimeout(() => {
-        this.$refs.cardContentInner.scrollIntoView({
-          block: 'end',
-          inline: 'nearest',
-          behavior: 'smooth'
-        });
+        if (window.innerWidth >= 961) {
+          this.scrollToBottom();
+        } else {
+          this.scrollToItem();
+        }
       }, 300);
     }
   },
