@@ -1,7 +1,14 @@
 <template>
+  <!--
+    Datatable component - Available in Primevue library
+  -->
   <DataTable removableSort :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
     <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :header="col.header"
       :key="col.field">
+      <!--
+        Custom templates used for the team badges,
+        the form field and to assign an id to the intRank field <span>
+      -->
       <template #body="slotProps">
         <div v-if="col.field === 'strTeamBadge'">
           <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
@@ -41,25 +48,60 @@ export default {
     }
   },
   props: {
+    /**
+     * The data that will be shown in the datatable
+     * @type [{
+            "intRank": "1",
+            "strTeam": "Manchester City",
+            "strTeamBadge": "https:\/\/www.thesportsdb.com\/images\/media\/team\/badge\/vwpvry1467462651.png\/tiny",
+            "strForm": "WLWLW",
+            "intPlayed": "38",
+            "intWin": "27",
+            "intLoss": "6",
+            "intDraw": "5",
+            "intGoalsFor": "83",
+            "intGoalsAgainst": "32",
+            "intGoalDifference": "51",
+            "intPoints": "86",
+        }]
+     */
     data: {
       type: Array,
       default: () => []
     },
+    /**
+     * The columns that will be shown in the datatable
+     * @type [{header: '', field: ''}]
+     */
     tableColumns: {
       type: Array,
       required: true
     },
+    /**
+      * The filter used for filtering against the teams' names of the
+      * datatable
+      */
     tableFilter: {
       type: String,
       default: null
     },
   },
   methods: {
+    /**
+     * It determines whether to show the sorting buttons in the datatable
+     *
+     * @param {string} field
+     */
     isSortingBtnShown (field) {
-      return !['strTeamBadge', 'strForm', 'intPlayed', 'intRank', 'strTeam'].includes(field)
+      return !['strTeamBadge', 'strForm', 'intPlayed', 'intRank', 'strTeam']
+        .includes(field)
     }
   },
   watch: {
+    /**
+     * It updates the table filters, everytime the users changes the filter or
+     * clicks on the "load more" button
+     */
     tableFilter: function (newVal) {
       this.tableFilters['strTeam'].value = newVal;
     }
