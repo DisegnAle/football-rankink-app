@@ -3,14 +3,14 @@
     Datatable component - Available in Primevue library
   -->
   <DataTable removableSort stripedRows :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
-    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :key="col.field">
+    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :key="col.field" :header="col.header">
 
       <!--
         Custom templates used for
         showing a tooltip on header fields hover
       -->
       <template #header>
-        <div v-tooltip.top="col.extendedHeader">{{ col.header }}</div>
+        <div class="fr-ranking-table__p-custom-title" v-tooltip.top="col.extendedHeader">{{ col.header }}</div>
       </template>
 
       <!--
@@ -133,6 +133,20 @@ export default {
             padding: 0.5rem 3rem;
           }
         }
+      }
+    }
+
+    &__p-custom-title {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .fr-ranking-table {
+    &.p-datatable .p-datatable-thead > tr > th {
+      .p-column-title {
+        display: none;
       }
     }
   }
