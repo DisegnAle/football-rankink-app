@@ -11,7 +11,7 @@
         showing a tooltip on header fields hover
       -->
       <template #header>
-        <div class="fr-ranking-table__p-custom-title" v-tooltip.top="{ value: col.extendedHeader}">{{ col.header }}</div>
+        <div class="fr-ranking-table__p-custom-title" v-tooltip.bottom="{ value: col.extendedHeader}">{{ col.header }}</div>
       </template>
 
       <!--
