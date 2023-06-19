@@ -95,7 +95,7 @@ export default {
     },
     /**
      * The columns that will be shown in the datatable
-     * @type [{header: '', field: ''}]
+     * @type [{header: '', extendedHeader: '', field: ''}]
      */
     tableColumns: {
       type: Array,
