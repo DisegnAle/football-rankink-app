@@ -3,7 +3,8 @@
     Datatable component - Available in Primevue library
   -->
   <DataTable removableSort stripedRows :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
-    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :key="col.field" :header="col.header">
+    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :key="col.field"
+      :header="col.header">
 
       <!--
         Custom templates used for
@@ -17,7 +18,7 @@
         Custom templates used for
         the team badges,
         the form field
-        and to assign an "id" to the "intRank" field
+        the intRank field
       -->
       <template #body="bodySlotProps">
         <div v-if="col.field === 'strTeamBadge'">
@@ -28,10 +29,10 @@
             :form-type="icon">
           </form-icon>
         </div>
-        <span v-else-if="col.field === 'intRank'" :id="`row-${bodySlotProps.data.intRank}`">
+        <span v-else-if="col.field === 'intRank'" :id="`row-${bodySlotProps.data.intRank}`" class="p-field-property">
           {{ bodySlotProps.data[col.field] }}
         </span>
-        <span v-else>
+        <span v-else :class="{'p-field-property__strTeam': col.field === 'strTeam'}">
           {{ bodySlotProps.data[col.field] }}
         </span>
       </template>
@@ -136,15 +137,36 @@ export default {
       }
     }
 
+    &.p-datatable .p-datatable-tbody>tr {
+      td:first-child {
+        padding-top: 2em;
+        padding-bottom: 1em;
+
+        .p-field-property {
+          border: 1px solid;
+          border-radius: 50%;
+          padding: 0.4em;
+          text-align: center;
+          width: 34px;
+          height: 34px;
+        }
+      }
+    }
+
     &__p-custom-title {
       display: none;
+    }
+
+    .p-field-property__strTeam {
+      color: var(--primary-color);
+      font-weight: 600;
     }
   }
 }
 
 @media screen and (min-width: 961px) {
   .fr-ranking-table {
-    &.p-datatable .p-datatable-thead > tr > th {
+    &.p-datatable .p-datatable-thead>tr>th {
       .p-column-title {
         display: none;
       }
