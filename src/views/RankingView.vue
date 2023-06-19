@@ -195,10 +195,9 @@ export default {
      *
      */
     onLoadMoreButtonClick () {
-      if (this.recordsToShow.length === this.rankingData.length) {
-        return;
+      if(this.rankingTableFilter){
+        this.resetRankingTableFilter();
       }
-      this.resetRankingTableFilter();
       this.updateRecordsToShow();
       this.scrollTo();
     },
