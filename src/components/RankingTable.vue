@@ -11,7 +11,7 @@
         showing a tooltip on header fields hover
       -->
       <template #header>
-        <div class="fr-ranking-table__p-custom-title" v-tooltip.top="col.extendedHeader">{{ col.header }}</div>
+        <div class="fr-ranking-table__p-custom-title" v-tooltip.top="{ value: col.extendedHeader}">{{ col.header }}</div>
       </template>
 
       <!--
@@ -21,14 +21,23 @@
         the intRank field
       -->
       <template #body="bodySlotProps">
+        <!--
+          Image crest with alt attribute
+        -->
         <div v-if="col.field === 'strTeamBadge'">
           <img :src="bodySlotProps.data.strTeamBadge" :alt="`${bodySlotProps.data.strTeam} crest`" />
         </div>
+        <!--
+          Custom form icon component
+        -->
         <div v-else-if="col.field === 'strForm'">
           <form-icon v-for="(icon, index) in bodySlotProps.data.strForm.split('')" :key="`${icon}-${index}`"
             :form-type="icon">
           </form-icon>
         </div>
+        <!--
+          IntRank field
+        -->
         <span v-else-if="col.field === 'intRank'" :id="`row-${bodySlotProps.data.intRank}`" class="p-field-property">
           {{ bodySlotProps.data[col.field] }}
         </span>
