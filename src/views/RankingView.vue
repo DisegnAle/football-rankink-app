@@ -127,23 +127,50 @@ export default {
     mapResponsePropsToTableHeaderFields (field) {
       switch (field) {
         case 'intGoalsAgainst':
-          return 'GA';
+          return {
+            header: 'GA',
+            extendedHeader: 'GOALS AGAINST'
+          };
         case 'intPoints':
-          return 'Pts';
+          return {
+            header: 'Pts',
+            extendedHeader: 'Points'
+          }
         case 'intGoalDifference':
-          return 'GD';
+          return {
+            header: 'GD',
+            extendedHeader: 'GOAL DIFFERENCE'
+          };
         case 'intPlayed':
-          return 'GP';
+          return {
+            header: 'P',
+            extendedHeader: 'PLAYED'
+          };
         case 'intGoalsFor':
-          return 'GF';
+          return {
+            header: 'GF',
+            extendedHeader: 'GOALS FOR'
+          };
         case 'intDraw':
-          return 'D';
+          return {
+            header: 'D',
+            extendedHeader: 'DRAW'
+          };
         case 'intLoss':
-          return 'L';
+          return {
+            header: 'L',
+            extendedHeader: 'LOSS'
+          };
         case 'intWin':
-          return 'W';
+          return {
+            header: 'W',
+            extendedHeader: 'WIN'
+          };
         case 'strForm':
-          return 'Form';
+          return {
+            header: 'FORM',
+            extendedHeader: 'FORM'
+          };
         default:
           return '';
       }
@@ -225,9 +252,11 @@ export default {
      */
     rankingTableColumns () {
       return this.visibleFields.map((field) => {
+        const { header, extendedHeader } = this.mapResponsePropsToTableHeaderFields(field)
         return {
           field,
-          header: this.mapResponsePropsToTableHeaderFields(field)
+          header,
+          extendedHeader
         };
       });
     },
@@ -282,7 +311,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 1199px){
+@media only screen and (max-width: 1199px) {
   .fr-ranking-view__card {
     &-header {
       background: var(--surface-a);

@@ -3,28 +3,36 @@
     Datatable component - Available in Primevue library
   -->
   <DataTable removableSort stripedRows :value="data" class="p-datatable-sm fr-ranking-table" :filters.sync="tableFilters">
-    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :header="col.header"
-      :key="col.field">
+    <Column :sortable="isSortingBtnShown(col.field)" v-for="col of tableColumns" :field="col.field" :key="col.field">
+
+      <!--
+        Custom templates used for
+        showing a tooltip on header fields hover
+      -->
+      <template #header>
+        <div v-tooltip.top="col.extendedHeader">{{ col.header }}</div>
+      </template>
+
       <!--
         Custom templates used for
         the team badges,
         the form field
         and to assign an "id" to the "intRank" field
       -->
-      <template #body="slotProps">
+      <template #body="bodySlotProps">
         <div v-if="col.field === 'strTeamBadge'">
-          <img :src="slotProps.data.strTeamBadge" :alt="`${slotProps.data.strTeam} crest`" />
+          <img :src="bodySlotProps.data.strTeamBadge" :alt="`${bodySlotProps.data.strTeam} crest`" />
         </div>
         <div v-else-if="col.field === 'strForm'">
-          <form-icon v-for="(icon, index) in slotProps.data.strForm.split('')" :key="`${icon}-${index}`"
+          <form-icon v-for="(icon, index) in bodySlotProps.data.strForm.split('')" :key="`${icon}-${index}`"
             :form-type="icon">
           </form-icon>
         </div>
-        <span v-else-if="col.field === 'intRank'" :id="`row-${slotProps.data.intRank}`">
-          {{ slotProps.data[col.field] }}
+        <span v-else-if="col.field === 'intRank'" :id="`row-${bodySlotProps.data.intRank}`">
+          {{ bodySlotProps.data[col.field] }}
         </span>
         <span v-else>
-          {{ slotProps.data[col.field] }}
+          {{ bodySlotProps.data[col.field] }}
         </span>
       </template>
     </Column>
@@ -34,6 +42,7 @@
 import { FilterMatchMode } from 'primevue/api/';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
+import Tooltip from 'primevue/tooltip';
 import FormIcon from './FormIcon.vue';
 export default {
   name: 'RankingTable',
@@ -41,6 +50,9 @@ export default {
     DataTable,
     Column,
     FormIcon
+  },
+  directives: {
+    'tooltip': Tooltip
   },
   data () {
     return {
@@ -124,5 +136,9 @@ export default {
       }
     }
   }
+}
+
+.p-tooltip {
+  position: absolute;
 }
 </style>
